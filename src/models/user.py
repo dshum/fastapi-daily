@@ -19,8 +19,11 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
 
     first_name: Mapped[str] = mapped_column((String(255)))
     last_name: Mapped[str] = mapped_column((String(255)))
-    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
-    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now())
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),
+                                                 server_default=func.now(), default=func.now())
+    updated_at: Mapped[datetime] = mapped_column(DateTime(timezone=True),
+                                                 server_default=func.now(), server_onupdate=func.now(),
+                                                 default=func.now(), onupdate=func.now())
     weightings: Mapped[List["Weighting"]] = relationship("Weighting")
     meals: Mapped[List["Meal"]] = relationship("Meal")
 

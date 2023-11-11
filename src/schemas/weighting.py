@@ -1,8 +1,8 @@
 import uuid
 from datetime import datetime
+from decimal import Decimal
 
-from pydantic import BaseModel, Field, PositiveFloat
-from sqlalchemy import DateTime
+from pydantic import BaseModel, Field
 
 
 class WeightingBaseDTO(BaseModel):
@@ -14,7 +14,7 @@ class WeightingBaseDTO(BaseModel):
 
 
 class WeightingWriteDTO(BaseModel):
-    weight_kg: float = PositiveFloat()
+    weight_kg: Decimal = Field(gt=0, max_digits=4, decimal_places=1)
 
     class Config:
         from_attributes = True
